@@ -1,0 +1,10 @@
+Pillow>=9.0
+#torch>=2.4
+torchvision>=0.16
+transformers>=4.40
+accelerate>=0.26
+huggingface-hub>=0.22,<0.27  # >=0.27 breaks xet downloads (blip, blip2)
+sentencepiece>=0.1.99
+timm>=0.9
+einops>=0.7
+qwen-vl-utils>=0.0.2
