@@ -44,7 +44,7 @@ if args.output_dir is None:
     models_tag = "+".join(m.replace("/", "-") for m in args.models)
     archive_tag = Path(args.archive).stem.replace(".tar", "")
     time_tag = datetime.now().strftime("%Y%m%d_%H%M%S")
-    args.output_dir = f"results_{models_tag}_{archive_tag}_{time_tag}"
+    args.output_dir = f"vqa_output/results_{models_tag}_{archive_tag}_{time_tag}"
 
 print(f"Output dir: {args.output_dir}")
 
