@@ -17,6 +17,7 @@ from collections import defaultdict
 from dataclasses import asdict
 from pathlib import Path
 from typing import Optional
+from datetime import datetime
 
 from bio_vqa.models import Figure, VQAResult
 
@@ -459,7 +460,7 @@ def run_pipeline(
     archive_path: str,
     model_keys: Optional[list[str]] = None,
     questions: Optional[list[dict]] = None,
-    output_dir: str = "vqa_output",
+    output_dir: Optional[str] = None,
     max_figures: Optional[int] = None,
     hf_token: Optional[str] = None,
 ) -> dict:
@@ -471,6 +472,16 @@ def run_pipeline(
 
     model_keys = model_keys or [DEFAULT_MODEL]
     questions = questions or QUESTIONS
+    
+    # Auto-generate output dir: results_<models>_<archive>_<timestamp>
+    if output_dir is None:
+        models_tag = "+".join(m.replace("/", "-") for m in model_keys)
+        archive_tag = Path(archive_path).stem.replace(".tar", "")
+        time_tag = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_dir = f"vqa_output/results_{models_tag}_{archive_tag}_{time_tag}"
+
+    print(f"Output dir: {output_dir}")
+
     os.makedirs(output_dir, exist_ok=True)
 
     # 1. Parse
