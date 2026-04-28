@@ -1,6 +1,11 @@
 from bio_vqa.vqa import (
-    MODELS,
+     MODELS,
     QUESTIONS,
+    ALL_QUESTIONS,
+    QUESTIONS_VISION_ONLY,
+    PAIRED_QUESTIONS_NO_CTX,
+    PAIRED_QUESTIONS_WITH_CTX,
+    QUESTIONS_CONTEXT_REQUIRED,
     DEFAULT_MODEL,
     list_models,
     parse_archive,
@@ -8,8 +13,5 @@ from bio_vqa.vqa import (
     run_vqa,
     evaluate,
     run_pipeline,
-    caption_overlap,
-    completeness,
-    cross_model_agreement,
 )
 from bio_vqa.models import Figure, VQAResult
