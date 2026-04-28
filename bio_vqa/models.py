@@ -21,7 +21,8 @@ class VQAResult:
     answer: str
     latency_s: float
     context_used: bool
-    caption_overlap: float = 0.0
-    completeness: float = 0.0
-    cross_model_agreement: float = 0.0
     composite_score: float = 0.0
+    bleu1: float = 0.0
+    bleu4: float = 0.0
+    rouge_l: float = 0.0
+    
