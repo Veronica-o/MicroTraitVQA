@@ -7,7 +7,7 @@ scores the answers, and saves `results.json` + `report.md`.
 ## Setup
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/bio-vqa.git
+git clone https://github.com/YOUR_USERNAME/MicroTraitVQA.git
 cd bio-vqa
 pip install -r requirements.txt
 ```
@@ -15,7 +15,7 @@ pip install -r requirements.txt
 ## Usage
 
 ```bash
-# basic run (default model: qwen2.5-vl-3b)
+# basic run (default model: )
 python run.py --archive PMC11047695_tar.gz
 
 # run two models
@@ -40,32 +40,8 @@ run_pipeline(
 )
 ```
 
-## Models
 
-### Free Colab T4 (15 GB VRAM)
 
-| Key | VRAM | Notes |
-|---|---|---|
-| `qwen2.5-vl-3b` | 8 GB | **Recommended.** Best on charts and tables. |
-| `paligemma-3b` | 7 GB | Good on scientific figures. [Needs HF licence.](#paligemma) |
-| `internvl2-2b` | 5 GB | Smallest true VQA model. |
-| `llava-1.5-7b` | 14 GB | Fits T4 (tight). |
-| `florence-2-large` | 4 GB | Captioning only — not real VQA. |
-
-### Needs A100 (40 GB)
-
-| Key | VRAM |
-|---|---|
-| `qwen2.5-vl-7b` | 16 GB |
-| `internvl2-8b` | 18 GB |
-
-### Legacy / API
-
-| Key | Notes |
-|---|---|
-| `blip2-opt-2.7b` | Legacy baseline |
-| `blip-vqa-base` | CPU-runnable, good for testing |
-| `claude-api` | Needs `ANTHROPIC_API_KEY` env var |
 
 ## Output
 
@@ -77,9 +53,10 @@ vqa_output/
 ```
 
 Scores:
-- `caption_overlap` — token F1 between the answer and the figure caption (proxy for accuracy)
-- `completeness` — heuristic based on answer length
-- `composite_score` — mean of the above two
+- `Rouge Score` 
+- `Bleu1 Score` 
+- `Bleu4 Score` 
+- `composite_score`
 
 ## Project layout
 
@@ -89,30 +66,11 @@ bio_vqa/
   vqa.py        everything else: config, parsing, inference, evaluation, pipeline
   __init__.py   public exports
 run.py          CLI entry point
-tests/
-  test_evaluation.py  unit tests (no GPU needed)
-  test_parsing.py     parsing tests (skip if no archive)
-notebooks/
-  colab_demo.ipynb
 requirements.txt
 ```
 
-## Tests
 
-```bash
-# no GPU needed
-pytest tests/test_evaluation.py -v
-
-# with a real archive in tests/data/
-pytest tests/ -v
 ```
-
-## Colab
-
-Open `notebooks/colab_demo.ipynb`.
-Update the `REPO` variable in the first cell to point at your fork.
-
----
 
 ### PaliGemma
 
